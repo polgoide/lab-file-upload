@@ -1,4 +1,5 @@
-const express            = require('express');
+require('dotenv').config()
+const express = require('express');
 const path               = require('path');
 const favicon            = require('serve-favicon');
 const logger             = require('morgan');
@@ -95,12 +96,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 const index = require('./routes/index');
 const authRoutes = require('./routes/authentication');
+const posts = require('./routes/posts');
+app.use('/', posts);
 app.use('/', index);
 app.use('/', authRoutes);
 

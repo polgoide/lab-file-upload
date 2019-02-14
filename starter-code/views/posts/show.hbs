@@ -1,0 +1,21 @@
+<h3>{{post.content}}</h3>
+<p>{{post.creatorId.username}}</p>
+<p>{{post.content}}</p>
+<img src="{{post.photoURL}}" alt="">
+
+<h4>Comentarios</h4>
+{{#each comments}}
+<p><strong>{{this.creatorId.username}}:</strong> {{this.content}}</p>
+<img src="{{this.photoURL}}" alt="">
+{{/each}}
+
+<h4>Add a comment</h4>
+<form action="/show/{{post._id}}" method="post" enctype="multipart/form-data">
+<p>Comment
+  <input type="text" name="content">
+</p>
+<p>Upload pics
+  <input type="file" name="photoURL" accept="image/*">
+</p>
+<input type="submit">
+</form>
